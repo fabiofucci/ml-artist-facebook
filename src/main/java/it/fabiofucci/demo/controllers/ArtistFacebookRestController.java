@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 @RestController
@@ -36,11 +35,13 @@ public class ArtistFacebookRestController {
         Object response = new HashMap<>();
 
         if (!artistName.trim().isEmpty()) {
+            /*
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            */
             String token = this.facebookTokenService.getToken();
 
             String backendServiceUrl = this.pageSearchEndPoint;
@@ -63,18 +64,6 @@ public class ArtistFacebookRestController {
 
                 LOG.error(String.format("Errore nella ricerca delle pagine Facebook. [%s]", response));
 
-                /*
-                HashMap innerObj = new HashMap<String, Object>();
-                innerObj.put("id", "9876987");
-                innerObj.put("name", "Asssdfd");
-                innerObj.put("verification_status", "verified");
-                innerObj.put("link", "http://");
-
-                ArrayList<HashMap> retList = new ArrayList<>();
-                retList.add(innerObj);
-
-                ((HashMap) response).put("data", retList);
-                */
             } catch (Exception e) {
                 LOG.error("Errore nella ricerca delle pagine Facebook", e);
             }
